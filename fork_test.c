@@ -50,7 +50,7 @@ int  main(void)
 		{
 			waitpid(pid_array[q],NULL, 0);
 		}
-		tprintf("Child Process has exited.\n");
+		//tprintf("Child Process has exited.\n");
 	printf("Parent had exited.\n");
 	}else tprintf(" Everything was done without error.\n ");
 
