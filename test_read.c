@@ -29,11 +29,11 @@ int main(){
   while(1){
   sem_wait(sem);
 //  printf("before scanf");
-//  scanf("%s",buf);
+  scanf("%s",buf);
 //  printf("scanf result: %s",buf);
-//  strcpy(shmaddr,buf);
+  strcpy(shmaddr,buf);
 //  printf("before printf");
-  printf("%s",shmaddr);
+//  printf("%s",shmaddr);
 //  printf("after printf");
   sem_post(sem);
 //  if(strcmp(shmaddr,"q") == 0){
