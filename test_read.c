@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <error.h>
 #include <semaphore.h>
+#include <errno.h>
 #define SIZE 1024
 int main(){
   int shmid;
@@ -26,12 +27,23 @@ int main(){
 //  printf("%s",shmaddr);
   sem_t *sem;
   sem = sem_open("hiahiahia",O_CREAT,0644,1);
+  sem_post(sem);//init the sem enter num
+  if(sem == SEM_FAILED){
+   printf("%s\n",strerror(errno));
+  }else{
+   printf("open success\n");
+  }
+  int result = -100; 
   while(1){
   sem_wait(sem);
-//  printf("before scanf");
+//  printf("before scanf"); 
+  sem_getvalue(sem,&result);
+  printf("%d",result);
   scanf("%s",buf);
 //  printf("scanf result: %s",buf);
+//  printf("%s\n",buf);
   strcpy(shmaddr,buf);
+  printf(" enter %s\n",shmaddr);
 //  printf("before printf");
 //  printf("%s",shmaddr);
 //  printf("after printf");
