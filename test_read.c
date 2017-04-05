@@ -26,8 +26,13 @@ int main(){
 //  strcpy(shmaddr,"hello world");
 //  printf("%s",shmaddr);
   sem_t *sem;
-  sem = sem_open("hiahiahia",O_CREAT,0644,1);
+  sem = sem_open("src",O_CREAT,0644,1);
   sem_post(sem);//init the sem enter num
+  sem_t *sem_read;
+  sem_read = sem_open("read",O_CREAT,0644,1);
+  sem_post(sem_read);
+  sem_t *sem_write;
+  sem_write = sem_open("write",O_CREAT,0644,1);
   if(sem == SEM_FAILED){
    printf("%s\n",strerror(errno));
   }else{
@@ -35,10 +40,15 @@ int main(){
   }
   int result = -100; 
   while(1){
+  sem_getvalue(sem,&result);
+  printf("src %d\n",result);
+  sem_getvalue(sem_read, &result);
+  printf("read %d\n",result);
+  sem_getvalue(sem_write,&result);
+  printf("write %d\n", result);
+  sem_wait(sem_read);
   sem_wait(sem);
 //  printf("before scanf"); 
-  sem_getvalue(sem,&result);
-  printf("%d",result);
   scanf("%s",buf);
 //  printf("scanf result: %s",buf);
 //  printf("%s\n",buf);
@@ -48,6 +58,7 @@ int main(){
 //  printf("%s",shmaddr);
 //  printf("after printf");
   sem_post(sem);
+  sem_post(sem_write);
 //  if(strcmp(shmaddr,"q") == 0){
 //    break;
 //  }
