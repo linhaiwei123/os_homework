@@ -24,7 +24,7 @@ int main(){
   sem_queue_full = sem_open(queue_full, O_CREAT, 0644, 0);
 
   int result = -2;
-    
+   
   
   fork_result = fork();
   if(fork_result == -1){
@@ -32,8 +32,6 @@ int main(){
   }
   if(fork_result == 0){
     while(1){
-      
-      printf("wait sem_queue_full pid: %d\n", getpid());
       sem_wait(sem_queue_full);
       printf("get sem_queue_full pid:  %d\n", getpid());
 	printf("wait sem_queue pid: %d\n", getpid());
@@ -47,7 +45,7 @@ int main(){
      // sem_getvalue(sem_queue_full, &result);
      // printf("sem_queue_full %d\n", result);
 	
-      printf("PID: %d ",getpid());
+            printf("PID: %d ",getpid());
       printf("line read %d",shared_stuff->line_read);
       printf("content: %s\n",shared_stuff->buffer[shared_stuff->line_read]);
       if(strcmp(shared_stuff->buffer[shared_stuff->line_read],"QUIT") == 0){
@@ -61,7 +59,7 @@ int main(){
       printf("post sem_queue_empty pid: %d\n", getpid());
       printf("sleep pid: %d\n", getpid());
       sleep(2);
-    }
+          }
     sem_unlink(queue_mutex);
     sem_unlink(queue_empty);
     sem_unlink(queue_full);
@@ -81,7 +79,7 @@ int main(){
 //        sem_getvalue(sem_queue_full, &result);
 //        printf("sem_queue_full %d\n", result);
 	
-      printf("PID: %d ", getpid());
+     printf("PID: %d ", getpid());
       printf("content: %s\n", shared_stuff->buffer[shared_stuff->line_read]);
       if(strcmp(shared_stuff->buffer[shared_stuff->line_read],"QUIT") == 0){
            break;

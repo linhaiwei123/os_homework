@@ -57,7 +57,7 @@ int main(void)
   }
 
 
-  if(shmdt(shared_memory) == -1){
+ if(shmdt(shared_memory) == -1){
     fprintf(stderr, "shmdt failed\n");
     exit(EXIT_FAILURE);
   }
